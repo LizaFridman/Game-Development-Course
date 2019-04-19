@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Rock : Object
 {
-    [SerializeField] Vector3 topPosition;
-    [SerializeField] Vector3 bottomPosition;
+    [SerializeField] private Vector3 topPosition;
+    [SerializeField] private Vector3 bottomPosition;
     private readonly float rockSpeed = 3f;
     // Start is called before the first frame update
     void Start()

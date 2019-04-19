@@ -4,19 +4,33 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    Animator anim;
+    [SerializeField] private float jumpForce = 100f;
+    private Animator animator;
+    private Rigidbody rigidBody;
     private const int LeftClick = 0;
-    // Start is called before the first frame update
+
+    private bool isJump = false;
     void Start()
     {
-        anim = GetComponent<Animator>();   
+        animator = GetComponent<Animator>();
+        rigidBody = GetComponent<Rigidbody>();
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
         if (Input.GetMouseButtonDown(LeftClick)) {
-            anim.Play("Jump");
+            animator.Play("Jump");
+            rigidBody.useGravity = true;
+            isJump = true;
+        }
+    }
+
+    void FixedUpdate()
+    {
+        if (isJump) {
+            isJump = false;
+            rigidBody.velocity = new Vector2(0, 0);
+            rigidBody.AddForce(new Vector2(0, jumpForce), ForceMode.Impulse);
         }
     }
 }
