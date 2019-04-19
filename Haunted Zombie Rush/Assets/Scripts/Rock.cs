@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Rock : MonoBehaviour
+public class Rock : Object
 {
     [SerializeField] Vector3 topPosition;
     [SerializeField] Vector3 bottomPosition;
@@ -14,9 +14,9 @@ public class Rock : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
-        
+        base.Update();
     }
 
     IEnumerator Move(Vector3 targetPosition) {
