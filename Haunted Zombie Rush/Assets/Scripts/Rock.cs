@@ -27,8 +27,6 @@ public class Rock : Object
             yield return null;
         }
 
-        print("Reached the target");
-
         yield return new WaitForSeconds(0.5f);
 
         Vector3 newTarget = targetPosition.y == topPosition.y ? bottomPosition : topPosition;
