@@ -28,7 +28,10 @@ public class Player : MonoBehaviour
     
     void Update()
     {
-        if (Input.GetMouseButtonDown(LeftClick)) {
+        if (!GameManager.instance.IsGameOver &&
+            Input.GetMouseButtonDown(LeftClick))
+        {
+            GameManager.instance.PlayerStartedGame();
             animator.Play("Jump");
             audioSource.PlayOneShot(sfxJump);
             rigidBody.useGravity = true;
@@ -51,6 +54,8 @@ public class Player : MonoBehaviour
             rigidBody.AddForce(new Vector2(-50, 20), ForceMode.Impulse);
             rigidBody.detectCollisions = false;
             audioSource.PlayOneShot(sfxDeath);
+
+            GameManager.instance.PlayerCollided();
         }
     }
 }

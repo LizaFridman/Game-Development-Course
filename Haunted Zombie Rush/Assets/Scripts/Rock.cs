@@ -16,7 +16,10 @@ public class Rock : Object
     // Update is called once per frame
     protected override void Update()
     {
-        base.Update();
+        if (GameManager.instance.IsPlayerActive)
+        {
+            base.Update();
+        }
     }
 
     IEnumerator Move(Vector3 targetPosition) {
