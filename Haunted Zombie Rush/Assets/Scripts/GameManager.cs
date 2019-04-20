@@ -1,13 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;
 
+    [SerializeField] private GameObject mainMenu;
+
     private bool isPlayerActive = false;
     private bool isGameOver = false;
+    private bool isGameStarted = false;
 
     public bool IsPlayerActive
     {
@@ -17,6 +21,11 @@ public class GameManager : MonoBehaviour
     public bool IsGameOver
     {
         get { return isGameOver; }
+    }
+
+    public bool IsGameStarted
+    {
+        get { return isGameStarted; }
     }
 
     void Awake()
@@ -31,6 +40,7 @@ public class GameManager : MonoBehaviour
         }
 
         DontDestroyOnLoad(gameObject);// When switching between scenes, the game objects won't be destroyed
+        Assert.IsNotNull(mainMenu);
     }
 
     // Start is called before the first frame update
@@ -53,5 +63,10 @@ public class GameManager : MonoBehaviour
     public void PlayerStartedGame()
     {
         isPlayerActive = true;
+    }
+
+    public void EnterGame() {
+        mainMenu.SetActive(false);
+        isGameStarted = true;
     }
 }

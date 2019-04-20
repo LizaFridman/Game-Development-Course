@@ -28,10 +28,11 @@ public class Player : MonoBehaviour
     
     void Update()
     {
-        if (!GameManager.instance.IsGameOver &&
+        if (!GameManager.instance.IsGameOver && GameManager.instance.IsGameStarted &&
             Input.GetMouseButtonDown(LeftClick))
         {
             GameManager.instance.PlayerStartedGame();
+
             animator.Play("Jump");
             audioSource.PlayOneShot(sfxJump);
             rigidBody.useGravity = true;
