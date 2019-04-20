@@ -8342,7 +8342,7 @@ PrefabInstance:
     - target: {fileID: 6491950441493091666, guid: 11269984b3da5b24fa5654b18ef348cc,
         type: 3}
       propertyPath: m_Name
-      value: Player (1)
+      value: PlayerModel
       objectReference: {fileID: 0}
     - target: {fileID: 6491950441493252466, guid: 11269984b3da5b24fa5654b18ef348cc,
         type: 3}
@@ -10260,6 +10260,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Platform
+      objectReference: {fileID: 0}
+    - target: {fileID: 8583715768552945541, guid: a1468696adf26da47b8eae0fb5943fd3,
+        type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
       objectReference: {fileID: 0}
     - target: {fileID: 8583715768552945540, guid: a1468696adf26da47b8eae0fb5943fd3,
         type: 3}

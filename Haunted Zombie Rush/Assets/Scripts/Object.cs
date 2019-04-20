@@ -18,7 +18,7 @@ public class Object : MonoBehaviour
     {
         if (!GameManager.instance.IsGameOver)
         {
-            transform.Translate(Vector3.left * (objectSpeed * Time.deltaTime));
+            transform.Translate(Vector3.left * (objectSpeed * Time.deltaTime), Space.World);
 
             if (transform.localPosition.x <= resetPosition)
             {
