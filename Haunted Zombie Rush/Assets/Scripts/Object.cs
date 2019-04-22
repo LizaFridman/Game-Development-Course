@@ -7,6 +7,14 @@ public class Object : MonoBehaviour
     [SerializeField] private float objectSpeed = 1f;
     [SerializeField] private float resetPosition = -24.8f;
     [SerializeField] private float startPosition = 79.95f;
+
+    protected Vector3 originalPosition;
+
+    protected void Awake()
+    {
+        originalPosition = transform.position;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,5 +34,10 @@ public class Object : MonoBehaviour
                 transform.position = newPosition;
             }
         }
+    }
+
+    public void Reset()
+    {
+        transform.position = originalPosition;
     }
 }

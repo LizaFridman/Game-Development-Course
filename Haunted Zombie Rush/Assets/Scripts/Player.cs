@@ -12,6 +12,8 @@ public class Player : MonoBehaviour
     private const int LeftClick = 0;
     private bool isJump = false;
     private AudioSource audioSource;
+    private Vector3 originalPlayerPosition = new Vector3(-0.18018f, 3.3041f, 4.36f);
+    private Quaternion originalPlayerRotation = new Quaternion(0f, 0.9f, 0f, 0.5f);
 
     private void Awake()
     {
@@ -24,6 +26,10 @@ public class Player : MonoBehaviour
         animator = GetComponent<Animator>();
         rigidBody = GetComponent<Rigidbody>();
         audioSource = GetComponent<AudioSource>();
+
+        if (gameObject.tag == "Player") {
+            ResetPlayer();
+        }
     }
     
     void Update()
@@ -35,7 +41,10 @@ public class Player : MonoBehaviour
 
             animator.Play("Jump");
             audioSource.PlayOneShot(sfxJump);
-            rigidBody.useGravity = true;
+            if (GameManager.instance.IsPlayerActive)
+            {
+                rigidBody.useGravity = true;
+            }
             isJump = true;
         }
     }
@@ -58,5 +67,14 @@ public class Player : MonoBehaviour
 
             GameManager.instance.PlayerCollided();
         }
+    }
+
+    public void ResetPlayer() {
+        rigidBody.velocity = Vector3.zero;
+        transform.rotation = originalPlayerRotation;
+        transform.position = originalPlayerPosition;
+
+        rigidBody.detectCollisions = true;
+        rigidBody.useGravity = false;
     }
 }

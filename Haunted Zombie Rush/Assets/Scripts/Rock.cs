@@ -9,13 +9,18 @@ public class Rock : Object
 
     private readonly float rockSpeed = 3f;
     private readonly float rotationSpeed = 90f;
+    
+    void Awake()
+    {
+        base.Awake();
+    }
 
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(Move(bottomPosition));
     }
-    
+
     protected override void Update()
     {
         if (GameManager.instance.IsPlayerActive)
