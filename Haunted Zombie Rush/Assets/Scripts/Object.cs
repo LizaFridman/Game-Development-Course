@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Object : MonoBehaviour
 {
-    [SerializeField] private float objectSpeed = 1f;
+    [SerializeField] private float horizontalSpeed = 1f;
     [SerializeField] private float resetPosition = -24.8f;
-    [SerializeField] private float startPosition = 79.95f;
+    [SerializeField] protected float startPosition = 79.95f;
 
     protected Vector3 originalPosition;
 
@@ -26,7 +26,7 @@ public class Object : MonoBehaviour
     {
         if (!GameManager.instance.IsGameOver)
         {
-            transform.Translate(Vector3.left * (objectSpeed * Time.deltaTime), Space.World);
+            transform.Translate(Vector3.left * (horizontalSpeed * Time.deltaTime), Space.World);
 
             if (transform.localPosition.x <= resetPosition)
             {
@@ -36,8 +36,9 @@ public class Object : MonoBehaviour
         }
     }
 
-    public void Reset()
+    public virtual void Reset()
     {
         transform.position = originalPosition;
+        gameObject.SetActive(true);
     }
 }

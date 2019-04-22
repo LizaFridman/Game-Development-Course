@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Rock : Object
 {
-    [SerializeField] private Vector3 topPosition;
-    [SerializeField] private Vector3 bottomPosition;
+    [SerializeField] protected Vector3 topPosition;
+    [SerializeField] protected Vector3 bottomPosition;
 
-    private readonly float rockSpeed = 3f;
-    private readonly float rotationSpeed = 90f;
+    [SerializeField] protected float verticalSpeed = 3f;
+    protected float rotationSpeed = 90f;
     
     void Awake()
     {
@@ -36,10 +36,10 @@ public class Rock : Object
     /// </summary>
     /// <param name="targetPosition"></param>
     /// <returns></returns>
-    IEnumerator Move(Vector3 targetPosition) {
+    protected IEnumerator Move(Vector3 targetPosition) {
         while (Mathf.Abs((targetPosition - transform.localPosition).y) > 0.2f) {
             Vector3 direction = (targetPosition.y == topPosition.y) ? Vector3.up : Vector3.down;
-            transform.localPosition += direction * rockSpeed * Time.deltaTime;
+            transform.localPosition += direction * verticalSpeed * Time.deltaTime;
 
             yield return null;
         }

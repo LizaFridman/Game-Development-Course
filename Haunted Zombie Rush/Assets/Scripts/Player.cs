@@ -60,12 +60,22 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Obstacle") {
+        var colliderTag = collision.gameObject.tag;
+        if (colliderTag == "Obstacle")
+        {
             rigidBody.AddForce(new Vector2(-50, 20), ForceMode.Impulse);
             rigidBody.detectCollisions = false;
             audioSource.PlayOneShot(sfxDeath);
 
             GameManager.instance.PlayerCollided();
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Coin")
+        {
+            GameManager.instance.CoinGathered();
         }
     }
 

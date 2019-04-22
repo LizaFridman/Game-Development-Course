@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject gameOverMenu;
     [SerializeField] private Player player;
     [SerializeField] private Rock[] rocks;
+    [SerializeField] private Coin[] coins;
 
     private const string scorePrefix = "Total Coins: ";
     private Vector3 originalObsticalesPosition = new Vector3(11.97f, 8.8f, -3.830773f);
@@ -53,6 +54,7 @@ public class GameManager : MonoBehaviour
         Assert.IsNotNull(gameOverMenu);
         Assert.IsNotNull(player);
         Assert.IsNotNull(rocks);
+        Assert.IsNotNull(coins);
     }
 
     // Start is called before the first frame update
@@ -111,6 +113,10 @@ public class GameManager : MonoBehaviour
 
         foreach (var rock in rocks) {
             rock.Reset();
+        }
+
+        foreach (var coin in coins) {
+            coin.Reset();
         }
     }
     
