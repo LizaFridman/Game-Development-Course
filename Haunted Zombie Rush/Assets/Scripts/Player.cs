@@ -71,6 +71,8 @@ public class Player : MonoBehaviour
 
     public void ResetPlayer() {
         rigidBody.velocity = Vector3.zero;
+        rigidBody.freezeRotation = true;
+
         transform.rotation = originalPlayerRotation;
         transform.position = originalPlayerPosition;
 

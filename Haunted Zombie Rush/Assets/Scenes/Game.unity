@@ -7155,7 +7155,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 534669902}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 043e465a16a2f0943bdc9c410edc43df, type: 3}
@@ -7263,10 +7263,6 @@ MonoBehaviour:
   - {fileID: 1849384705}
   - {fileID: 771552295}
   - {fileID: 243264702}
-  platforms:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!1 &559108065
 GameObject:
   m_ObjectHideFlags: 0
@@ -7928,7 +7924,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 534669907}
-        m_MethodName: EnterGame
+        m_MethodName: ReplayGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
