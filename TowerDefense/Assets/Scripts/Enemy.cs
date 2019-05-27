@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
@@ -43,7 +41,7 @@ public class Enemy : MonoBehaviour
             target++;
         }
         else if(other.tag == "Finish"){
-            GameManager.instance.RemoveEnemyFromScreen();
+            GameManager.Instance.RemoveEnemyFromScreen();
             Destroy(gameObject);
         }
     }
