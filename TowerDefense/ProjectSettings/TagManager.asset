@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Checkpoint
   - Enemy
+  - BuildSite
+  - Ground
+  - Tower
   layers:
   - Default
   - TransparentFX
@@ -42,4 +45,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Items
+    uniqueID: 3735522599
     locked: 0
