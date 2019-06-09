@@ -11,6 +11,18 @@ TextureImporter:
   - first:
       213: 3422549641512507940
     second: KnightTower
+  - first:
+      213: 869762779325548650
+    second: sc
+  - first:
+      213: -1478896303367997371
+    second: score_board
+  - first:
+      213: -6759911384512506936
+    second: play_button
+  - first:
+      213: 2472578548103375534
+    second: tower_display
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -165,7 +177,7 @@ TextureImporter:
         width: 172
         height: 212
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -173,6 +185,90 @@ TextureImporter:
       bones: []
       spriteID: 1e72dc432dfa2674dab4ae1e2d2a84ef
       internalID: 3422549641512507940
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sc
+      rect:
+        serializedVersion: 2
+        x: 390
+        y: 1176
+        width: 270
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26586a4d7a4e65a43a017ff72eea876e
+      internalID: 869762779325548650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: score_board
+      rect:
+        serializedVersion: 2
+        x: 396
+        y: 1184
+        width: 250
+        height: 91
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7a2be592fcfbb24aa015d803e872b46
+      internalID: -1478896303367997371
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: play_button
+      rect:
+        serializedVersion: 2
+        x: 1230
+        y: 1411
+        width: 392
+        height: 92
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e3686c262ad6db84d907786d09354a84
+      internalID: -6759911384512506936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tower_display
+      rect:
+        serializedVersion: 2
+        x: 1543
+        y: 2263
+        width: 69
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4bb763156f4be29409ed9e13d7723259
+      internalID: 2472578548103375534
       vertices: []
       indices: 
       edges: []

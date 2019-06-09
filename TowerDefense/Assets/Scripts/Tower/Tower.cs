@@ -79,7 +79,7 @@ public class Tower : MonoBehaviour
     }
 
     private void SetEnemyTarget()
-    {
+    { 
         if (_enemyTarget == null || _enemyTarget.IsDead)
         {
             var nearestEnemy = GetNearestEnemyInRange();
