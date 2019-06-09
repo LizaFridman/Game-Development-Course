@@ -174,4 +174,4 @@ MonoBehaviour:
   - {fileID: 2471427126857432097, guid: 5a2f8426b3942db43b895f12c25a5ed9, type: 3}
   - {fileID: 7387203022110356365, guid: d8ee1cdf05dcd2f448c2854e30a48c84, type: 3}
   _navigationUpdate: 0.01
-  _healthPoints: 0
+  _healthPoints: 200

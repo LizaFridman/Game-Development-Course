@@ -3,37 +3,54 @@
 public class Enemy : MonoBehaviour
 {
     [SerializeField]
-    private Transform exitPoint;
+    private Transform _exitPoint;
     [SerializeField]
-    private Transform[] waypoints;
+    private Transform[] _waypoints;
     [SerializeField]
-    private float navigationUpdate;
+    private float _navigationUpdate;
+    [SerializeField]
+    private int _healthPoints;
 
-    private int target = 0;
-    private Transform enemyLocation;
-    private float navigationTime = 0;
+    private int _target = 0;
+    private Transform _enemyLocation;
+    private Collider2D _enemyCollider;
+    private Animator _animator;
+
+    private float _navigationTime = 0;
+    private bool _isDead = false;
+
+    public bool IsDead
+    {
+        get
+        {
+            return _isDead;
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        enemyLocation = GetComponent<Transform>();
+        _enemyLocation = GetComponent<Transform>();
+        _enemyCollider = GetComponent<Collider2D>();
+        _animator = GetComponent<Animator>();
+
         GameManager.Instance.RegisterEnemy(this);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (waypoints != null) {
-            navigationTime += Time.deltaTime;
-            if (navigationTime > navigationUpdate) {
-                if (target < waypoints.Length)
+        if (_waypoints != null && !_isDead) {
+            _navigationTime += Time.deltaTime;
+            if (_navigationTime > _navigationUpdate) {
+                if (_target < _waypoints.Length)
                 {
-                    enemyLocation.position = Vector2.MoveTowards(enemyLocation.position, waypoints[target].position, navigationTime);
+                    _enemyLocation.position = Vector2.MoveTowards(_enemyLocation.position, _waypoints[_target].position, _navigationTime);
                 }
                 else {
-                    enemyLocation.position = Vector2.MoveTowards(enemyLocation.position, exitPoint.position, navigationTime);
+                    _enemyLocation.position = Vector2.MoveTowards(_enemyLocation.position, _exitPoint.position, _navigationTime);
                 }
-                navigationTime = 0;
+                _navigationTime = 0;
             }
         }
     }
@@ -42,10 +59,35 @@ public class Enemy : MonoBehaviour
     {
         if (other.tag == "Checkpoint")
         {
-            target++;
+            _target++;
         }
-        else if(other.tag == "Finish"){
+        else if (other.tag == "Finish") {
             GameManager.Instance.Unregister(this);
+        } else if (other.tag == "Projectile") {
+            var projectile = other.gameObject.GetComponent<Projectile>();
+
+            if (projectile != null) {
+                Hit(projectile.AttackStrength);
+            }
+
+            Destroy(other.gameObject);
         }
+    }
+
+    public void Hit(int hitPoints) {
+        if (_healthPoints - hitPoints > 0)
+        {
+            _healthPoints -= hitPoints;
+            _animator.Play("Hurt");
+        }
+        else {
+            _animator.SetTrigger("DidDie");
+            Die();
+        }
+    }
+
+    public void Die() {
+        _isDead = true;
+        _enemyCollider.enabled = false;
     }
 }
