@@ -27,7 +27,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1435283213654478625}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -119,7 +119,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1435283213654478638}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: SelectedTower
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1435283213654478636}
+          m_ObjectArgumentAssemblyTypeName: TowerButton, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1435283213654478636
@@ -136,3 +147,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerObject: {fileID: 2240782834831733826, guid: 0f73399649f28da4786f172abe95cfb9,
     type: 3}
+  drageSprite: {fileID: 21300000, guid: 14a5806ccc0074646890772edc6a5102, type: 3}
