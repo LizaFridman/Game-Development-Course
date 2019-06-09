@@ -14,10 +14,11 @@ public class GameManager : Singleton<GameManager>
     private int totalEnemies;
     [SerializeField]
     private int enemiesPerSpawn;
-
-    private int enemiesOnScreen = 0;
-    private const float spawnDelay = 0.5f;
     
+    private const float spawnDelay = 0.5f;
+
+    public List<Enemy> EnemyList = new List<Enemy>();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,16 +26,16 @@ public class GameManager : Singleton<GameManager>
     }
     
     IEnumerator Spawn() {
-        if (enemiesPerSpawn > 0 && enemiesOnScreen < totalEnemies)
+        if (enemiesPerSpawn > 0 && EnemyList.Count < totalEnemies)
         {
             for (var i = 0; i < enemiesPerSpawn; i++)
             {
-                if (enemiesOnScreen < maxEnemiesOnScreen)
+                if (EnemyList.Count < maxEnemiesOnScreen)
                 {
                     int rand = (int)Random.Range(0,3);
                     var newEnemy = Instantiate(enemies[rand]) as GameObject;
                     newEnemy.transform.position = spawnPoint.transform.position;
-                    enemiesOnScreen++;
+                    //enemiesOnScreen++;
                 }
             }
             yield return new WaitForSeconds(spawnDelay);
@@ -42,9 +43,21 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-    public void RemoveEnemyFromScreen() {
-        if (enemiesOnScreen > 0) {
-            enemiesOnScreen--;
+    public void RegisterEnemy(Enemy enemy) {
+        EnemyList.Add(enemy);
+
+    }
+
+    public void Unregister(Enemy enemy) {
+        EnemyList.Remove(enemy);
+        Destroy(enemy.gameObject);
+    }
+
+    public void DestroyAllEnemies() {
+        foreach (Enemy enemy in EnemyList) {
+            Destroy(enemy.gameObject);
         }
+
+        EnemyList.Clear();
     }
 }
