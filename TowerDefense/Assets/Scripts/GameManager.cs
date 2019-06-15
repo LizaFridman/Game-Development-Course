@@ -26,7 +26,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField]
     private GameObject spawnPoint;
     [SerializeField]
-    private GameObject[] enemies;
+    private Enemy[] enemies;
     [SerializeField]
     private int totalEnemies = 3;
     [SerializeField]
@@ -37,10 +37,9 @@ public class GameManager : Singleton<GameManager>
     private int totalEscaped = 0;
     private int roundEscaped = 0;
     private int totalKilled = 0;
-    private int enemiesToSpawn = 0;
+    private int _enemiesToSpawn = 0;
     private GameStatus currentGameStatus = GameStatus.Play;
     private AudioSource _audioSource;
-
 
     private const float spawnDelay = 0.5f;
 
@@ -133,6 +132,9 @@ public class GameManager : Singleton<GameManager>
     public void UpdateGameState() {
         lbl_totalEscaped.text = "Escaped " + TotalEscaped + "/10";
         if (RoundEscaped + TotalKilled == totalEnemies) {
+            if (waveNumber <= enemies.Length) {
+                _enemiesToSpawn = waveNumber;
+            }
             SetGameState();
             ShowMenu();
         }
@@ -157,7 +159,6 @@ public class GameManager : Singleton<GameManager>
     }
 
     public void PlayButtonPressed() {
-        //Debug.Log("Play Button Pressed");
         switch (currentGameStatus) {
             case GameStatus.Next:
                 waveNumber++;
@@ -169,6 +170,7 @@ public class GameManager : Singleton<GameManager>
                 TotalMoney = 10;
                 TowerManager.Instance.DestroyAllTowers();
                 TowerManager.Instance.RenameBuildSitesTag();
+                _enemiesToSpawn = 0;
                 lbl_totalMoney.text = "" + TotalMoney;
                 lbl_totalEscaped.text = "Escaped " + TotalEscaped + "/10";
                 _audioSource.PlayOneShot(SoundManager.Instance.NewGame);
@@ -192,9 +194,8 @@ public class GameManager : Singleton<GameManager>
                 if (EnemyList.Count < totalEnemies)
                 {
                     int rand = (int)Random.Range(0,3);
-                    var newEnemy = Instantiate(enemies[enemiesToSpawn]) as GameObject;
+                    var newEnemy = Instantiate(enemies[Random.Range(0,_enemiesToSpawn)]);
                     newEnemy.transform.position = spawnPoint.transform.position;
-                    //enemiesOnScreen++;
                 }
             }
             yield return new WaitForSeconds(spawnDelay);
