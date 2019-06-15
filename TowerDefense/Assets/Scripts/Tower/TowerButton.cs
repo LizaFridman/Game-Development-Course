@@ -3,7 +3,7 @@
 public class TowerButton : MonoBehaviour
 {
     [SerializeField]
-    private GameObject towerObject;
+    private Tower towerObject;
     [SerializeField]
     private Sprite drageSprite;
     [SerializeField]
@@ -14,7 +14,7 @@ public class TowerButton : MonoBehaviour
         get { return _towerPrice; }
     }
 
-    public GameObject TowerObject
+    public Tower TowerObject
     {
         get
         {

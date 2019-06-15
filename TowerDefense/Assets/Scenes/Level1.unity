@@ -966,7 +966,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 27312122}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5844908042292970173}
+        m_MethodName: PlayButtonPressed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &27312122
@@ -11678,6 +11689,11 @@ PrefabInstance:
       propertyPath: btn_play
       value: 
       objectReference: {fileID: 27312121}
+    - target: {fileID: 5844908042292970173, guid: 98ca897afb7996d4aa210864b2104dd0,
+        type: 3}
+      propertyPath: totalWaves
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 98ca897afb7996d4aa210864b2104dd0, type: 3}
 --- !u!4 &534393706 stripped
@@ -48878,6 +48894,12 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 3640991573082466964}
+    - target: {fileID: 1435283213654478636, guid: 38eae5a7028f38d4c8165c7eced1b4d6,
+        type: 3}
+      propertyPath: towerObject
+      value: 
+      objectReference: {fileID: -536090548166525409, guid: 0f73399649f28da4786f172abe95cfb9,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 38eae5a7028f38d4c8165c7eced1b4d6, type: 3}
 --- !u!1001 &1541614032049868341
@@ -49525,6 +49547,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 49707494161bb664d902a5add7bb6f67, type: 3}
+--- !u!114 &5844908042292970173 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5844908042292970173, guid: 98ca897afb7996d4aa210864b2104dd0,
+    type: 3}
+  m_PrefabInstance: {fileID: 534393705}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d02e4733260ffcc4a94f8e31bcff50fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7082025386049199850
 PrefabInstance:
   m_ObjectHideFlags: 0

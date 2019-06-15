@@ -64,15 +64,18 @@ public class Enemy : MonoBehaviour
             _target++;
         }
         else if (other.tag == "Finish") {
+            GameManager.Instance.RoundEscaped++;
+            GameManager.Instance.TotalEscaped++;
+
             GameManager.Instance.Unregister(this);
+            GameManager.Instance.UpdateGameState();
         } else if (other.tag == "Projectile") {
             var projectile = other.gameObject.GetComponent<Projectile>();
+            Destroy(other.gameObject);
 
             if (projectile != null) {
                 Hit(projectile.AttackStrength);
             }
-
-            Destroy(other.gameObject);
         }
     }
 
@@ -91,5 +94,8 @@ public class Enemy : MonoBehaviour
     public void Die() {
         _isDead = true;
         _enemyCollider.enabled = false;
+        GameManager.Instance.TotalKilled++;
+        GameManager.Instance.AddMoney(_rewardAmount);
+        GameManager.Instance.UpdateGameState();
     }
 }

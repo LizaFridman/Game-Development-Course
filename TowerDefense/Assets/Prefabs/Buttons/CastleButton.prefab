@@ -301,7 +301,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59b44ecd8927b824b9241252f1a606a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerObject: {fileID: 8273895661029764565, guid: 3ae4b9705b2c2524f8d6c2052d46c18d,
+  towerObject: {fileID: 1757192073229932855, guid: 3ae4b9705b2c2524f8d6c2052d46c18d,
     type: 3}
   drageSprite: {fileID: 21300000, guid: a78a3f1f9859348e8b266f807ae7b6b8, type: 3}
   _towerPrice: 10
