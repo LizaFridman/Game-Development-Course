@@ -45,6 +45,14 @@ public class Tower : MonoBehaviour
             var newProjectile = Instantiate(_projectile) as Projectile;
             newProjectile.transform.localPosition = transform.localPosition;
 
+            if (newProjectile.ProjectileType == ProjectileType.Arrow) {
+                GameManager.Instance.AudioSource.PlayOneShot(SoundManager.Instance.Arrow);
+            } else if (newProjectile.ProjectileType == ProjectileType.Fireball) {
+                GameManager.Instance.AudioSource.PlayOneShot(SoundManager.Instance.Fireball);
+            } else if (newProjectile.ProjectileType == ProjectileType.Rock) {
+                GameManager.Instance.AudioSource.PlayOneShot(SoundManager.Instance.Rock);
+            }
+
             StartCoroutine(LaunchProjectile(newProjectile));
         }
     }
@@ -105,8 +113,6 @@ public class Tower : MonoBehaviour
                 _enemyTarget = null;
             }
         }
-
-        
     }
 
     private List<Enemy> GetEnemiesInRange() {

@@ -83,6 +83,7 @@ public class Enemy : MonoBehaviour
         if (_healthPoints - hitPoints > 0)
         {
             _healthPoints -= hitPoints;
+            GameManager.Instance.AudioSource.PlayOneShot(SoundManager.Instance.Hit);
             _animator.Play("Hurt");
         }
         else {
@@ -95,6 +96,8 @@ public class Enemy : MonoBehaviour
         _isDead = true;
         _enemyCollider.enabled = false;
         GameManager.Instance.TotalKilled++;
+        GameManager.Instance.AudioSource.PlayOneShot(SoundManager.Instance.Death);
+
         GameManager.Instance.AddMoney(_rewardAmount);
         GameManager.Instance.UpdateGameState();
     }
