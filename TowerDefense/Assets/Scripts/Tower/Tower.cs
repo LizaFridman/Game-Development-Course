@@ -25,6 +25,7 @@ public class Tower : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        CheckDropTower();
         _attackCounter -= Time.deltaTime;
         SetEnemyTarget();
     }
@@ -135,5 +136,14 @@ public class Tower : MonoBehaviour
         }
 
         return nearest;
+    }
+
+    private void CheckDropTower()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            TowerManager.Instance.DisableDragSprite();
+            TowerManager.Instance.TowerButtonPressed = null;
+        }
     }
 }

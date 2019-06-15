@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 
 public class TowerManager : Singleton<TowerManager>
 {
-    private TowerButton towerButtonPressed;
+    public TowerButton TowerButtonPressed { get; set; }
     private SpriteRenderer spriteRenderer;
 
     // Start is called before the first frame update
@@ -19,7 +19,7 @@ public class TowerManager : Singleton<TowerManager>
         if (Input.GetMouseButtonDown(0)) {
             Vector2 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             RaycastHit2D hit = Physics2D.Raycast(worldPoint, Vector2.zero);
-            if (hit.collider.tag == "BuildSite")
+            if (hit.collider.tag == "BuildSite" && TowerButtonPressed != null)
             {
                 hit.collider.tag = "BuildSiteFull";
                 PlaceTower(hit);
@@ -50,16 +50,16 @@ public class TowerManager : Singleton<TowerManager>
 
     public void PlaceTower(RaycastHit2D hit)
     {
-        if (!EventSystem.current.IsPointerOverGameObject() && towerButtonPressed != null)
+        if (!EventSystem.current.IsPointerOverGameObject() && TowerButtonPressed != null)
         {
-            GameObject newTower = Instantiate(towerButtonPressed.TowerObject);
+            GameObject newTower = Instantiate(TowerButtonPressed.TowerObject);
             newTower.transform.position = hit.transform.position;
             DisableDragSprite();
         }
     }
 
     public void SelectedTower(TowerButton towerSelected) {
-        towerButtonPressed = towerSelected;
+        TowerButtonPressed = towerSelected;
         EnableDragSprite(towerSelected.DragSprite);
     }
 }

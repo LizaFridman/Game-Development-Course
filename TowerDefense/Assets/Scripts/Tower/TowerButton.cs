@@ -6,6 +6,13 @@ public class TowerButton : MonoBehaviour
     private GameObject towerObject;
     [SerializeField]
     private Sprite drageSprite;
+    [SerializeField]
+    private int _towerPrice;
+
+    public int TowerPrice
+    {
+        get { return _towerPrice; }
+    }
 
     public GameObject TowerObject
     {
