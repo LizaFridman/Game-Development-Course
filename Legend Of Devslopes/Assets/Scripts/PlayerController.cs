@@ -9,11 +9,13 @@ public class PlayerController : MonoBehaviour
 
     private CharacterController characterController;
     private Vector3 currentLookTarget = Vector3.zero;
+    private Animator anim;
 
     // Start is called before the first frame update
     void Start()
     {
         characterController = GetComponent<CharacterController>();
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -21,6 +23,22 @@ public class PlayerController : MonoBehaviour
     {
         var moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         characterController.SimpleMove(moveDirection * moveSpeed);
+
+        if (moveDirection == Vector3.zero)
+        {
+            anim.SetBool("IsWalking", false);
+        }
+        else {
+            anim.SetBool("IsWalking", true);
+        }
+
+        if (Input.GetMouseButtonDown(0)) { // Left Button
+            anim.Play("DoubleChop");
+        }
+
+        if (Input.GetMouseButtonDown(1)) {// Right Button
+            anim.Play("SpinAttack");
+        }
     }
 
     void FixedUpdate() {
