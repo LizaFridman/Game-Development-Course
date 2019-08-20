@@ -10,12 +10,13 @@ public class PlayerController : MonoBehaviour
     private CharacterController characterController;
     private Vector3 currentLookTarget = Vector3.zero;
     private Animator anim;
-
+    private BoxCollider[] swordColliders;
     // Start is called before the first frame update
     void Start()
     {
         characterController = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
+        swordColliders = GetComponentsInChildren<BoxCollider>();
     }
 
     // Update is called once per frame
@@ -68,6 +69,20 @@ public class PlayerController : MonoBehaviour
                 transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime * 10f);
 
             }
+        }
+    }
+
+    public void BeginAttack() {
+        foreach (var weapon in swordColliders) {
+            weapon.enabled = true;
+        }
+    }
+
+    public void EndAttack()
+    {
+        foreach (var weapon in swordColliders)
+        {
+            weapon.enabled = false;
         }
     }
 }
