@@ -19,6 +19,8 @@ public class EnemyHealth : MonoBehaviour
     private bool dissapearEnemy = false;
     private int currentHealth;
 
+    private ParticleSystem blood;
+
     public bool IsAlive {
         get {
             return isAlive;
@@ -33,6 +35,7 @@ public class EnemyHealth : MonoBehaviour
         nav = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
         audio = GetComponent<AudioSource>();
+        blood = GetComponentInChildren<ParticleSystem>();
 
         isAlive = true;
         currentHealth = statingHealth;
@@ -54,6 +57,7 @@ public class EnemyHealth : MonoBehaviour
             !GameManager.instance.GameOver) {
             if (other.tag == "PlayerWeapon") {
                 TakeHit();
+                blood.Play();
                 timer = 0f;
             }
         }

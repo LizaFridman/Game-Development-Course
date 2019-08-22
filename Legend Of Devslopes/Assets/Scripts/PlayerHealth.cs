@@ -14,6 +14,7 @@ public class PlayerHealth : MonoBehaviour
     private Animator anim;
     private int currentHealth;
     private AudioSource audio;
+    private ParticleSystem blood;
 
     void Awake()
     {
@@ -27,6 +28,7 @@ public class PlayerHealth : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         audio = GetComponent<AudioSource>();
         currentHealth = startingHealth;
+        blood = GetComponentInChildren<ParticleSystem>();
     }
 
     // Update is called once per frame
@@ -41,6 +43,7 @@ public class PlayerHealth : MonoBehaviour
 
             if (other.tag == "Weapon") {
                 TakeHit();
+                blood.Play();
                 timer = 0;
             }
         }
