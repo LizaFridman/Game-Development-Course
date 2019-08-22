@@ -11,15 +11,10 @@ public class EnemyMove : MonoBehaviour
     private Animator anim;
     private EnemyHealth enemyHealth;
 
-    void Awake() {
-        player = GameManager.instance.Player.transform;
-        Assert.IsNotNull(player);
-    }
-
     // Start is called before the first frame update
     void Start()
     {
-        
+        player = GameManager.instance.Player.transform;
         anim = GetComponent<Animator>();
         Assert.IsNotNull(anim);
         nav = GetComponent<NavMeshAgent>();
