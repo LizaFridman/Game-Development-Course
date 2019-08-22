@@ -1,17 +1,24 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
+using UnityEngine.Assertions;
+using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private int startingHealth = 100;
     [SerializeField] float timeSinceLastHitInSeconds = 2f;
+    [SerializeField] Slider healthSlider;
 
     private float timer = 0f;
     private CharacterController characterController;
     private Animator anim;
     private int currentHealth;
     private AudioSource audio;
+
+    void Awake()
+    {
+        Assert.IsNotNull(healthSlider);
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -44,6 +51,7 @@ public class PlayerHealth : MonoBehaviour
             GameManager.instance.PlayerHit(currentHealth);
             anim.Play("Hurt");
             currentHealth -= 10;
+            healthSlider.value = currentHealth;
             audio.PlayOneShot(audio.clip);
         }
 
