@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject tanker;
     [SerializeField] private GameObject ranger;
     [SerializeField] private GameObject soldier;
+    [SerializeField] private GameObject arrow;
     [SerializeField] private Text levelText;
 
     private bool isGameOver = false;
@@ -46,6 +47,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public GameObject Arrow
+    {
+        get
+        {
+            return arrow;
+        }
+    }
     void Awake() {
         if (instance == null)
         {
@@ -97,7 +105,7 @@ public class GameManager : MonoBehaviour
                     newEnemy = Instantiate(soldier);
                 }else if (randomEnemy == 1)
                 {
-                    newEnemy = Instantiate(ranger);
+                     newEnemy = Instantiate(ranger);
 
                 }
                 else
