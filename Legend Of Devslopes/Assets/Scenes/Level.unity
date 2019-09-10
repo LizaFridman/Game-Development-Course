@@ -28083,6 +28083,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ranger
       objectReference: {fileID: 0}
+    - target: {fileID: 263027655334374063, guid: b45822ba65f0b3e4581953adf763a23e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 263027655334374054, guid: b45822ba65f0b3e4581953adf763a23e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -121767,6 +121772,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ArrowPrefab
       objectReference: {fileID: 0}
+    - target: {fileID: 8818420300541866911, guid: 40d94c2cd1169f8478e2e97236c8a4eb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8818420300541866880, guid: 40d94c2cd1169f8478e2e97236c8a4eb,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -124060,7 +124070,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7995369752747790971}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -8.987935, y: 2.0000198, z: -11.768821}
+  m_LocalPosition: {x: -8.987935, y: 2.0000198, z: -11.7965}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5006512735971580383}

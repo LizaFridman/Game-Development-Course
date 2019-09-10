@@ -28,8 +28,7 @@ public class RangerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        isPlayerInRange = (Vector3.Distance(transform.position, player.transform.position) < range &&
-                           enemyHealth.IsAlive);
+        isPlayerInRange = (Vector3.Distance(transform.position, player.transform.position) < range && enemyHealth.IsAlive);
         if (isPlayerInRange)
         {
             RotateTowards(player.transform);
