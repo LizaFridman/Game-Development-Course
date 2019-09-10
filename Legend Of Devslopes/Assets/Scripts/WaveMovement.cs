@@ -11,7 +11,6 @@ public class WaveMovement : MonoBehaviour
     private Vector3 minPosition;
     private Vector3 maxPosition;
 
-    private bool isMovingUp = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,7 +28,7 @@ public class WaveMovement : MonoBehaviour
 
     IEnumerator MoveUp()
     {
-        Debug.Log("Moving Up");
+        //Debug.Log("Moving Up");
 
         while (IsFirstAboveSecond(maxPosition, transform.position, Vector3.up))
         {
@@ -37,13 +36,13 @@ public class WaveMovement : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
 
-        Debug.Log("Finished Moving Up");
-        StartCoroutine(MoveDown());
+        //Debug.Log("Finished Moving Up");
+        yield return StartCoroutine(MoveDown());
     }
 
     IEnumerator MoveDown()
     {
-        Debug.Log("Moving Down");
+        //Debug.Log("Moving Down");
 
         while (IsFirstAboveSecond(transform.position, minPosition, Vector3.up))
         {
@@ -51,8 +50,8 @@ public class WaveMovement : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
 
-        Debug.Log("Finished Moving Down");
-        StartCoroutine(MoveUp());
+        //Debug.Log("Finished Moving Down");
+        yield return StartCoroutine(MoveUp());
     }
 
     public static bool IsFirstAboveSecond(Vector3 a, Vector3 b, Vector3 up)
@@ -60,4 +59,6 @@ public class WaveMovement : MonoBehaviour
         //return Vector3.Dot(b - a, up) < 0;
         return (up.y > 0) ? (a.y > b.y) : (a.y < b.y);
     }
+
+
 }

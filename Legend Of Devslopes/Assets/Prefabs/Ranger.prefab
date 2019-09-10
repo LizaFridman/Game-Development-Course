@@ -1354,6 +1354,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   range: 10
   timeBetweenAttacks: 1
+  fireLocation: {fileID: 263027654885713715}
 --- !u!1 &263027655354963290
 GameObject:
   m_ObjectHideFlags: 0
