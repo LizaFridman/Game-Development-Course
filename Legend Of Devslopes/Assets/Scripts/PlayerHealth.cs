@@ -1,4 +1,5 @@
 ﻿
+using System;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.UI;
@@ -15,6 +16,25 @@ public class PlayerHealth : MonoBehaviour
     private int currentHealth;
     private AudioSource audio;
     private ParticleSystem blood;
+
+    public int CurrentHealth
+    {
+        get
+        {
+            return currentHealth;
+        }
+        set
+        {
+            if (value < 0)
+            {
+                currentHealth = 0;
+            }
+            else
+            {
+                currentHealth = value;
+            }
+        }
+    }
 
     void Awake()
     {
@@ -68,5 +88,20 @@ public class PlayerHealth : MonoBehaviour
         anim.SetTrigger("HeroDie");
         characterController.enabled = false;
         audio.PlayOneShot(audio.clip);
+    }
+
+    public void PowerUpHealth()
+    {
+        var powerUpValue = 30;
+        if (currentHealth <= startingHealth - powerUpValue)
+        {
+            CurrentHealth += powerUpValue;
+        }
+        else if (currentHealth < startingHealth)
+        {
+            CurrentHealth = startingHealth;
+        }
+
+        healthSlider.value = currentHealth;
     }
 }
