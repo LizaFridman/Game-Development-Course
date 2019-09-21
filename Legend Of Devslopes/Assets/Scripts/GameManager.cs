@@ -10,17 +10,28 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] GameObject player;
     [SerializeField] private GameObject[] spawnPoints;
+    [SerializeField] private GameObject[] powerUpSpawns;
     [SerializeField] private GameObject tanker;
     [SerializeField] private GameObject ranger;
     [SerializeField] private GameObject soldier;
     [SerializeField] private GameObject arrow;
-    [SerializeField] private Text levelText;
+    [SerializeField] private GameObject healthPowerUp;
+    [SerializeField] private GameObject speedPowerUp;
+    [SerializeField] Text levelText;
+    [SerializeField] int maxPowerUps = 4;
 
     private bool isGameOver = false;
     private int currentLevel;
+    private int powerUps = 0;
+
     private float generatedSpawnTime = 1;
     private float currentSpawnTime = 0;
+
+    private float powerUpSpawnTime = 5;
+    private float currentPowerUpSpawnTime = 0;
+
     private GameObject newEnemy;
+    private GameObject newPowerUp;
 
     private List<EnemyHealth> enemies = new List<EnemyHealth>();
     private List<EnemyHealth> killedEnemies = new List<EnemyHealth>();
@@ -33,6 +44,10 @@ public class GameManager : MonoBehaviour
     public void KillEnemy(EnemyHealth enemy)
     {
         killedEnemies.Add(enemy);
+    }
+
+    public void RegisterPowerUp() {
+        powerUps++;
     }
 
     public bool GameOver {
@@ -66,17 +81,17 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         currentLevel = 1;
         StartCoroutine(Spawn());
+        StartCoroutine(PowerUpSpawn());
     }
 
-    // Update is called once per frame
     void Update()
     {
         currentSpawnTime += Time.deltaTime;
+        currentPowerUpSpawnTime += Time.deltaTime;
     }
 
     public void PlayerHit(int currentHp) {
@@ -130,5 +145,34 @@ public class GameManager : MonoBehaviour
 
         yield return null;
         StartCoroutine(Spawn());
+    }
+
+    IEnumerator PowerUpSpawn() {
+        // todo: spawn power ups where no power ups are located.
+        if (currentPowerUpSpawnTime > powerUpSpawnTime)
+        {
+            currentPowerUpSpawnTime = 0;
+
+            if (powerUps < maxPowerUps)
+            {
+                var randomNumber = Random.Range(0, powerUpSpawns.Length - 1);
+                var spawnLocation = powerUpSpawns[randomNumber];
+
+                var randomPowerUp = Random.Range(0,2);
+                if (randomPowerUp == 0)
+                {
+                    newPowerUp = Instantiate(healthPowerUp) as GameObject;
+                }
+                else if(randomPowerUp == 1)
+                {
+                    newPowerUp = Instantiate(speedPowerUp) as GameObject;
+                }
+
+                newPowerUp.transform.position = spawnLocation.transform.position;
+            }
+        }
+
+        yield return null;
+        StartCoroutine(PowerUpSpawn());
     }
 }

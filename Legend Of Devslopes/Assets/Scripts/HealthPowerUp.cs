@@ -13,6 +13,7 @@ public class HealthPowerUp : MonoBehaviour
     {
         _player = GameManager.instance.Player;
         _playerHealth = _player.GetComponent<PlayerHealth>();
+        GameManager.instance.RegisterPowerUp();
     }
 
     private void OnTriggerEnter(Collider other)

@@ -28,36 +28,29 @@ public class WaveMovement : MonoBehaviour
 
     IEnumerator MoveUp()
     {
-        //Debug.Log("Moving Up");
-
         while (IsFirstAboveSecond(maxPosition, transform.position, Vector3.up))
         {
             transform.position = Vector3.MoveTowards(transform.position, maxPosition, Time.deltaTime * tideSpeed);
             yield return new WaitForEndOfFrame();
         }
 
-        //Debug.Log("Finished Moving Up");
         yield return StartCoroutine(MoveDown());
     }
 
     IEnumerator MoveDown()
     {
-        //Debug.Log("Moving Down");
-
         while (IsFirstAboveSecond(transform.position, minPosition, Vector3.up))
         {
             transform.position = Vector3.MoveTowards(transform.position, minPosition, Time.deltaTime * tideSpeed);
             yield return new WaitForEndOfFrame();
         }
 
-        //Debug.Log("Finished Moving Down");
         yield return StartCoroutine(MoveUp());
     }
 
-    public static bool IsFirstAboveSecond(Vector3 a, Vector3 b, Vector3 up)
+    public static bool IsFirstAboveSecond(Vector3 first, Vector3 second, Vector3 upDirecction)
     {
-        //return Vector3.Dot(b - a, up) < 0;
-        return (up.y > 0) ? (a.y > b.y) : (a.y < b.y);
+        return (upDirecction.y > 0) ? (first.y > second.y) : (first.y < second.y);
     }
 
 
