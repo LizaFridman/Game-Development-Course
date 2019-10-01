@@ -1557,7 +1557,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b23175d12936a2e46a8df5c11db74401, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statingHealth: 20
+  statingHealth: 30
   timeSinceLastHit: 0.5
   dissapearSpeed: 2
 --- !u!1 &7412009455803734900
