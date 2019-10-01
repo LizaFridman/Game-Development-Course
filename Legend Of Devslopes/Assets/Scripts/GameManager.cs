@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
     private float generatedSpawnTime = 1;
     private float currentSpawnTime = 0;
 
-    private float powerUpSpawnTime = 5;
+    private float powerUpSpawnTimeInSeconds = 60;
     private float currentPowerUpSpawnTime = 0;
 
     private GameObject newEnemy;
@@ -149,7 +149,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator PowerUpSpawn() {
         // todo: spawn power ups where no power ups are located.
-        if (currentPowerUpSpawnTime > powerUpSpawnTime)
+        if (currentPowerUpSpawnTime > powerUpSpawnTimeInSeconds)
         {
             currentPowerUpSpawnTime = 0;
 

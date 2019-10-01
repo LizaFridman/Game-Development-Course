@@ -5598,7 +5598,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 449669108}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 33.9, y: 0, z: -1.9}
+  m_LocalPosition: {x: 33.9, y: 0.43, z: -1.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2146060428}
@@ -113718,7 +113718,7 @@ PrefabInstance:
     - target: {fileID: 8073459216651880445, guid: f46545f0c91e4474d953b4fafeff5b7e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 10.282251
+      value: 3.42
       objectReference: {fileID: 0}
     - target: {fileID: 8073459216651880445, guid: f46545f0c91e4474d953b4fafeff5b7e,
         type: 3}
@@ -113841,7 +113841,7 @@ PrefabInstance:
         type: 3}
       propertyPath: speedPowerUp
       value: 
-      objectReference: {fileID: 7283389411241957536, guid: a7726cbb7f8f53443ad3739514eff244,
+      objectReference: {fileID: 7606526272651028908, guid: ebf509e1c3dc51b4daf04f21c54f1358,
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f46545f0c91e4474d953b4fafeff5b7e, type: 3}
@@ -116861,6 +116861,26 @@ PrefabInstance:
       propertyPath: healthSlider
       value: 
       objectReference: {fileID: 584247744}
+    - target: {fileID: 8340571287165239847, guid: cac3ab20e3cdefb4b881532dcddb8d0e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8340571287149681479, guid: cac3ab20e3cdefb4b881532dcddb8d0e,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.minScalar
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8340571287149681479, guid: cac3ab20e3cdefb4b881532dcddb8d0e,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8340571287149681479, guid: cac3ab20e3cdefb4b881532dcddb8d0e,
+        type: 3}
+      propertyPath: EmissionModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cac3ab20e3cdefb4b881532dcddb8d0e, type: 3}
 --- !u!23 &8341147182594762374

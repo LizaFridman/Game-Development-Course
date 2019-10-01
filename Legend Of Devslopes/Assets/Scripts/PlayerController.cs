@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,12 +12,41 @@ public class PlayerController : MonoBehaviour
     private Vector3 currentLookTarget = Vector3.zero;
     private Animator anim;
     private BoxCollider[] swordColliders;
+    private GameObject fireTrail;
+    private ParticleSystem fireTrailParticles;
+
     // Start is called before the first frame update
     void Start()
     {
         characterController = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
         swordColliders = GetComponentsInChildren<BoxCollider>();
+        fireTrail = GameObject.FindWithTag("Fire") as GameObject;
+        fireTrail.SetActive(false);
+        
+    }
+
+    public void SpeedPowerUp()
+    {
+        StartCoroutine(FireTrailRoutine());
+    }
+
+    public IEnumerator FireTrailRoutine()
+    {
+        fireTrail.SetActive(true);
+        moveSpeed = 10f;
+        yield return new WaitForSeconds(10f);
+
+        moveSpeed = 6f;
+
+        fireTrailParticles = fireTrail.GetComponent<ParticleSystem>();
+
+        var emission = fireTrailParticles.emission;
+        emission.enabled = false;
+        yield return new WaitForSeconds(3);// wait until last emission is finished (1-2)
+        emission.enabled = true;
+
+        fireTrail.SetActive(false);
     }
 
     // Update is called once per frame
