@@ -43,6 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dc1a35cbbe901b4c9d59ab62187bd4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  chunk: {fileID: 1360919110512301660, guid: d2a4c0fca18fa2847b89c71a1d8b71c5, type: 3}
   worldX: 16
   worldY: 16
   worldZ: 16

@@ -17,13 +17,21 @@ public class Chunk : MonoBehaviour
     private float textureWidth = 0.083f;
     private int faceCount;
     private World world;
-
-    [SerializeField] GameObject worldGO;
-    [SerializeField] int chunkSize = 16;
+    private int chunkSize;
+    private int chunkX;
+    private int chunkY;
+    private int chunkZ;
+    private GameObject worldGO;
 
     private Vector2 grassTop = new Vector2(1,11);
     private Vector2 grassSide = new Vector2(0,10);
     private Vector2 rock = new Vector2(7, 8);
+
+    public int ChunkSize { get => chunkSize; set => chunkSize = value; }
+    public int ChunkX { get => chunkX; set => chunkX = value; }
+    public int ChunkY { get => chunkY; set => chunkY = value; }
+    public int ChunkZ { get => chunkZ; set => chunkZ = value; }
+    public GameObject WorldGO { get => worldGO; set => worldGO = value; }
 
 
     // Start is called before the first frame update
@@ -50,35 +58,35 @@ public class Chunk : MonoBehaviour
             {
                 for (var z = 0; z < chunkSize; z++)
                 {
-                    if (world.Block(x, y, z) != (byte)TextureType.Air.GetHashCode()) {
+                    if (Block(x, y, z) != (byte)TextureType.Air.GetHashCode()) {
                         // Block above is air
-                        if (world.Block(x, y + 1, z) == (byte)TextureType.Air.GetHashCode()) {
-                            CubeTop(x, y, z, world.Block(x, y, z));
+                        if (Block(x, y + 1, z) == (byte)TextureType.Air.GetHashCode()) {
+                            CubeTop(x, y, z, Block(x, y, z));
                         }
                         // Block below is air
-                        if (world.Block(x, y - 1, z) == (byte)TextureType.Air.GetHashCode())
+                        if (Block(x, y - 1, z) == (byte)TextureType.Air.GetHashCode())
                         {
-                            CubeBottom(x, y, z, world.Block(x, y, z));
+                            CubeBottom(x, y, z, Block(x, y, z));
                         }
                         // Block to the east is air
-                        if (world.Block(x + 1, y, z) == (byte)TextureType.Air.GetHashCode())
+                        if (Block(x + 1, y, z) == (byte)TextureType.Air.GetHashCode())
                         {
-                            CubeEast(x, y, z, world.Block(x, y, z));
+                            CubeEast(x, y, z, Block(x, y, z));
                         }
                         // Block to the west is air
-                        if (world.Block(x - 1, y, z) == (byte)TextureType.Air.GetHashCode())
+                        if (Block(x - 1, y, z) == (byte)TextureType.Air.GetHashCode())
                         {
-                            CubeWest(x, y, z, world.Block(x, y, z));
+                            CubeWest(x, y, z, Block(x, y, z));
                         }
                         // Block to the north is air
-                        if (world.Block(x, y, z + 1) == (byte)TextureType.Air.GetHashCode())
+                        if (Block(x, y, z + 1) == (byte)TextureType.Air.GetHashCode())
                         {
-                            CubeNorth(x, y, z, world.Block(x, y, z));
+                            CubeNorth(x, y, z, Block(x, y, z));
                         }
                         // Block to the south is air
-                        if (world.Block(x, y, z - 1) == (byte)TextureType.Air.GetHashCode())
+                        if (Block(x, y, z - 1) == (byte)TextureType.Air.GetHashCode())
                         {
-                            CubeSouth(x, y, z, world.Block(x, y, z));
+                            CubeSouth(x, y, z, Block(x, y, z));
                         }
                     }
                         
@@ -195,4 +203,7 @@ public class Chunk : MonoBehaviour
         faceCount++;
     }
 
+    byte Block(int x, int y, int z) {
+        return world.Block(x + chunkX, y + ChunkY, z + ChunkZ);
+    }
 }
