@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9de8d1c53b991e846a26fb55dd492f96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  worldGO: {fileID: 2161929264257157920, guid: 9191d45e656433f45bcb6da7801600da, type: 3}
 --- !u!33 &1360919110512301729
 MeshFilter:
   m_ObjectHideFlags: 0

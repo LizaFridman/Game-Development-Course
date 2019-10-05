@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Texture {
-    air, grass, rock
+public enum TextureType {
+    Air, Grass, Rock
 }
 
 public class Chunk : MonoBehaviour
@@ -16,6 +16,10 @@ public class Chunk : MonoBehaviour
     private MeshCollider chunkCollider;
     private float textureWidth = 0.083f;
     private int faceCount;
+    private World world;
+
+    [SerializeField] GameObject worldGO;
+    [SerializeField] int chunkSize = 16;
 
     private Vector2 grassTop = new Vector2(1,11);
     private Vector2 grassSide = new Vector2(0,10);
@@ -27,9 +31,9 @@ public class Chunk : MonoBehaviour
     {
         mesh = GetComponent<MeshFilter>().mesh;
         chunkCollider = GetComponent<MeshCollider>();
+        world = worldGO.GetComponent("World") as World;
 
-        CubeTop(0,0,0, (byte)Texture.rock.GetHashCode());
-        UpdateMesh();
+        GenerateMesh();
     }
 
     // Update is called once per frame
@@ -38,29 +42,54 @@ public class Chunk : MonoBehaviour
         
     }
 
-    void CubeTop(int x, int y, int z, byte block)
+    void GenerateMesh()
     {
-        newVertices.Add(new Vector3(x, y, z + 1));
-        newVertices.Add(new Vector3(x + 1, y, z + 1));
-        newVertices.Add(new Vector3(x + 1, y, z));
-        newVertices.Add(new Vector3(x, y, z));
-
-        newTriangles.Add(faceCount*4);// 1
-        newTriangles.Add(faceCount * 4 +1);// 2
-        newTriangles.Add(faceCount * 4 +2);// 3
-        newTriangles.Add(faceCount * 4);// 1
-        newTriangles.Add(faceCount * 4 +2);// 3
-        newTriangles.Add(faceCount * 4 +3);// 4
-
-        Vector2 texturePosition = rock;
-
-        newUV.Add(new Vector2(textureWidth * texturePosition.x + textureWidth, textureWidth * texturePosition.y));
-        newUV.Add(new Vector2(textureWidth * texturePosition.x + textureWidth, textureWidth * texturePosition.y + textureWidth));
-        newUV.Add(new Vector2(textureWidth * texturePosition.x , textureWidth * texturePosition.y + textureWidth));
-        newUV.Add(new Vector2(textureWidth * texturePosition.x , textureWidth * texturePosition.y));
+        for (var x = 0; x < chunkSize; x++)
+        {
+            for (var y = 0; y < chunkSize; y++)
+            {
+                for (var z = 0; z < chunkSize; z++)
+                {
+                    if (world.Block(x, y, z) != (byte)TextureType.Air.GetHashCode()) {
+                        // Block above is air
+                        if (world.Block(x, y + 1, z) == (byte)TextureType.Air.GetHashCode()) {
+                            CubeTop(x, y, z, world.Block(x, y, z));
+                        }
+                        // Block below is air
+                        if (world.Block(x, y - 1, z) == (byte)TextureType.Air.GetHashCode())
+                        {
+                            CubeBottom(x, y, z, world.Block(x, y, z));
+                        }
+                        // Block to the east is air
+                        if (world.Block(x + 1, y, z) == (byte)TextureType.Air.GetHashCode())
+                        {
+                            CubeEast(x, y, z, world.Block(x, y, z));
+                        }
+                        // Block to the west is air
+                        if (world.Block(x - 1, y, z) == (byte)TextureType.Air.GetHashCode())
+                        {
+                            CubeWest(x, y, z, world.Block(x, y, z));
+                        }
+                        // Block to the north is air
+                        if (world.Block(x, y, z + 1) == (byte)TextureType.Air.GetHashCode())
+                        {
+                            CubeNorth(x, y, z, world.Block(x, y, z));
+                        }
+                        // Block to the south is air
+                        if (world.Block(x, y, z - 1) == (byte)TextureType.Air.GetHashCode())
+                        {
+                            CubeSouth(x, y, z, world.Block(x, y, z));
+                        }
+                    }
+                        
+                }
+            }
+        }
+        UpdateMesh();
     }
 
-    void UpdateMesh() {
+    void UpdateMesh()
+    {
         mesh.Clear();
         mesh.vertices = newVertices.ToArray();
         mesh.uv = newUV.ToArray();
@@ -77,4 +106,93 @@ public class Chunk : MonoBehaviour
         newTriangles.Clear();
         faceCount = 0;
     }
+
+    void CubeTop(int x, int y, int z, byte block)
+    {
+        newVertices.Add(new Vector3(x, y, z + 1));
+        newVertices.Add(new Vector3(x + 1, y, z + 1));
+        newVertices.Add(new Vector3(x + 1, y, z));
+        newVertices.Add(new Vector3(x, y, z));
+
+        Vector2 texturePosition = rock;
+
+        Cube(texturePosition);
+    }
+
+    void CubeNorth(int x, int y, int z, byte block)
+    {
+        newVertices.Add(new Vector3(x + 1, y - 1, z + 1));
+        newVertices.Add(new Vector3(x + 1, y, z + 1));
+        newVertices.Add(new Vector3(x, y, z + 1));
+        newVertices.Add(new Vector3(x, y - 1, z + 1));
+
+        Vector2 texturePosition = rock;
+
+        Cube(texturePosition);
+    }
+
+    void CubeEast(int x, int y, int z, byte block)
+    {
+        newVertices.Add(new Vector3(x + 1, y - 1 , z));
+        newVertices.Add(new Vector3(x + 1, y, z));
+        newVertices.Add(new Vector3(x + 1, y, z + 1));
+        newVertices.Add(new Vector3(x + 1, y - 1, z + 1));
+
+        Vector2 texturePosition = rock;
+
+        Cube(texturePosition);
+    }
+
+    void CubeSouth(int x, int y, int z, byte block)
+    {
+        newVertices.Add(new Vector3(x, y - 1, z));
+        newVertices.Add(new Vector3(x, y, z));
+        newVertices.Add(new Vector3(x + 1, y, z));
+        newVertices.Add(new Vector3(x + 1, y - 1, z));
+
+        Vector2 texturePosition = rock;
+
+        Cube(texturePosition);
+    }
+
+    void CubeWest(int x, int y, int z, byte block)
+    {
+        newVertices.Add(new Vector3(x, y - 1, z + 1));
+        newVertices.Add(new Vector3(x, y, z + 1));
+        newVertices.Add(new Vector3(x, y, z));
+        newVertices.Add(new Vector3(x, y - 1, z));
+
+        Vector2 texturePosition = rock;
+
+        Cube(texturePosition);
+    }
+
+    void CubeBottom(int x, int y, int z, byte block)
+    {
+        newVertices.Add(new Vector3(x, y - 1, z));
+        newVertices.Add(new Vector3(x + 1, y - 1, z));
+        newVertices.Add(new Vector3(x + 1, y - 1, z + 1));
+        newVertices.Add(new Vector3(x, y - 1, z + 1));
+
+        Vector2 texturePosition = rock;
+
+        Cube(texturePosition);
+    }
+
+    void Cube(Vector2 texturePosition) {
+        newTriangles.Add(faceCount * 4);// 1
+        newTriangles.Add(faceCount * 4 + 1);// 2
+        newTriangles.Add(faceCount * 4 + 2);// 3
+        newTriangles.Add(faceCount * 4);// 1
+        newTriangles.Add(faceCount * 4 + 2);// 3
+        newTriangles.Add(faceCount * 4 + 3);// 4
+
+        newUV.Add(new Vector2(textureWidth * texturePosition.x + textureWidth, textureWidth * texturePosition.y));
+        newUV.Add(new Vector2(textureWidth * texturePosition.x + textureWidth, textureWidth * texturePosition.y + textureWidth));
+        newUV.Add(new Vector2(textureWidth * texturePosition.x, textureWidth * texturePosition.y + textureWidth));
+        newUV.Add(new Vector2(textureWidth * texturePosition.x, textureWidth * texturePosition.y));
+
+        faceCount++;
+    }
+
 }
