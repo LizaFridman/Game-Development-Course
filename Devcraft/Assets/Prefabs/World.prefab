@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chunk: {fileID: 1360919110512301660, guid: d2a4c0fca18fa2847b89c71a1d8b71c5, type: 3}
-  worldX: 16
-  worldY: 16
-  worldZ: 16
+  worldX: 128
+  worldY: 128
+  worldZ: 128
+  chunkSize: 16
