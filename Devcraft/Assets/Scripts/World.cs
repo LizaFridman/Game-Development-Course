@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Noise;
 
 public class World : MonoBehaviour
 {
@@ -20,11 +21,19 @@ public class World : MonoBehaviour
 
         for (var x = 0; x < worldX; x++)
         {
-            for (var y = 0; y < worldY; y++)
+            for (var z = 0; z < worldZ; z++)
             {
-                for (var z = 0; z < worldZ; z++)
+                var rock = PerlinNoise(x, 0, z, 10f, 3f, 1.2f);
+                rock += PerlinNoise(x, 200, z, 20, 8f, 0f) + 10;
+
+                var grass = PerlinNoise(x, 100, z, 50, 30f, 0f) + 1;
+                for (var y = 0; y < worldY; y++)
                 {
-                    if (y <= 8)
+                    if (y <= rock)
+                    {
+                        worldData[x, y, z] = (byte)TextureType.Grass.GetHashCode();
+                    }
+                    else if (y <= grass)
                     {
                         worldData[x, y, z] = (byte)TextureType.Rock.GetHashCode();
                     }
@@ -39,7 +48,7 @@ public class World : MonoBehaviour
             {
                 for (var z = 0; z < chunks.GetLength(2); z++)
                 {
-                    var newChunk = Instantiate(chunk, new Vector3(x * chunkSize, y * chunkSize, z * chunkSize), new Quaternion(0,0,0,0)) as GameObject;
+                    var newChunk = Instantiate(chunk, new Vector3(x * chunkSize, y * chunkSize, z * chunkSize), new Quaternion(0, 0, 0, 0)) as GameObject;
                     chunks[x, y, z] = newChunk.GetComponent("Chunk") as Chunk;
                     chunks[x, y, z].WorldGO = gameObject;
                     chunks[x, y, z].ChunkSize = chunkSize;
@@ -55,6 +64,19 @@ public class World : MonoBehaviour
     void Update()
     {
 
+    }
+
+    public int PerlinNoise(int x, int y, int z, float scale, float height, float power)
+    {
+        var perlinValue = Noise.Noise.GetNoise((double)x / scale, (double)y / scale, (double)z / scale);
+        perlinValue *= height;
+
+        if (power != 0)
+        {
+            perlinValue = Mathf.Pow(perlinValue, power);
+        }
+
+        return (int)perlinValue;
     }
 
     public byte Block(int x, int y, int z) {

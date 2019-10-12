@@ -364,17 +364,17 @@ PrefabInstance:
     - target: {fileID: 2161929264257157921, guid: 9191d45e656433f45bcb6da7801600da,
         type: 3}
       propertyPath: worldX
-      value: 64
+      value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 2161929264257157921, guid: 9191d45e656433f45bcb6da7801600da,
         type: 3}
       propertyPath: worldY
-      value: 64
+      value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 2161929264257157921, guid: 9191d45e656433f45bcb6da7801600da,
         type: 3}
       propertyPath: worldZ
-      value: 64
+      value: 128
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9191d45e656433f45bcb6da7801600da, type: 3}
