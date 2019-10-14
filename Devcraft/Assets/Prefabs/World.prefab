@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2161929264257157922}
   - component: {fileID: 2161929264257157921}
+  - component: {fileID: 1126811999}
   m_Layer: 0
   m_Name: World
   m_TagString: Untagged
@@ -44,7 +45,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chunk: {fileID: 1360919110512301660, guid: d2a4c0fca18fa2847b89c71a1d8b71c5, type: 3}
-  worldX: 128
+  worldX: 512
   worldY: 128
-  worldZ: 128
+  worldZ: 512
   chunkSize: 16
+--- !u!114 &1126811999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2161929264257157920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5da188e0d596635459a1b84c4fe5088c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

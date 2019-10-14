@@ -46,22 +46,7 @@ public class World : MonoBehaviour
         }
 
         chunks = new Chunk[Mathf.FloorToInt(worldX / chunkSize), Mathf.FloorToInt(worldY / chunkSize), Mathf.FloorToInt(worldZ / chunkSize)];
-        for (var x = 0; x < chunks.GetLength(0); x++)
-        {
-            for (var y = 0; y < chunks.GetLength(1); y++)
-            {
-                for (var z = 0; z < chunks.GetLength(2); z++)
-                {
-                    var newChunk = Instantiate(chunk, new Vector3(x * chunkSize -0.5f, y * chunkSize + 0.5f, z * chunkSize - 0.5f), new Quaternion(0, 0, 0, 0)) as GameObject;
-                    chunks[x, y, z] = newChunk.GetComponent("Chunk") as Chunk;
-                    chunks[x, y, z].WorldGO = gameObject;
-                    chunks[x, y, z].ChunkSize = chunkSize;
-                    chunks[x, y, z].ChunkX = x * chunkSize;
-                    chunks[x, y, z].ChunkY = y * chunkSize;
-                    chunks[x, y, z].ChunkZ = z * chunkSize;
-                }
-            }
-        }
+        
     }
 
     // Update is called once per frame
@@ -92,5 +77,26 @@ public class World : MonoBehaviour
         }
 
         return worldData[x, y, z];
+    }
+
+    public void GenerateChunk(int x, int z)
+    {
+        for (var y = 0; y < chunks.GetLength(1); y++)
+        {
+            var newChunk = Instantiate(chunk, new Vector3(x * chunkSize - 0.5f, y * chunkSize + 0.5f, z * chunkSize - 0.5f), new Quaternion(0, 0, 0, 0)) as GameObject;
+            chunks[x, y, z] = newChunk.GetComponent("Chunk") as Chunk;
+            chunks[x, y, z].WorldGO = gameObject;
+            chunks[x, y, z].ChunkSize = chunkSize;
+            chunks[x, y, z].ChunkX = x * chunkSize;
+            chunks[x, y, z].ChunkY = y * chunkSize;
+            chunks[x, y, z].ChunkZ = z * chunkSize;
+        }
+    }
+
+    public void DestroyChunk(int x, int z) {
+        for (var y = 0; y < chunks.GetLength(1); y++)
+        {
+            Destroy(Chunks[x, y, z].gameObject);
+        }
     }
 }

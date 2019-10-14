@@ -10,13 +10,13 @@ public class ModifyTerrain : Singleton<ModifyTerrain>
     void Start()
     {
         world = gameObject.GetComponent("World") as World;
-        character = GameObject.FindGameObjectsWithTag("Player")[0];
+        character = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        LoadChunks(character.transform.position, 50,60);
     }
 
     public void DestroyBlock(float range, byte block) {
@@ -74,5 +74,29 @@ public class ModifyTerrain : Singleton<ModifyTerrain>
         world.Chunks[updateX, updateY, updateZ].IsUpdate = true;
     }
 
+    public void LoadChunks(Vector3 playerPosition, float distanceToLoad, float distanceToDestroy)
+    {
+        for (var x = 0; x < world.Chunks.GetLength(0); x++)
+        {
+            for (var z = 0; z < world.Chunks.GetLength(2); z++)
+            {
+                var distance = Vector2.Distance(new Vector2(x * world.ChunkSize, z * world.ChunkSize), new Vector2(playerPosition.x, playerPosition.z));
 
+                if (distance < distanceToLoad)
+                {
+                    if (world.Chunks[x, 0, z] == null)
+                    {
+                        world.GenerateChunk(x, z);
+                    }
+                }
+                else if (distance > distanceToDestroy)
+                {
+                    if (world.Chunks[x, 0, z] != null)
+                    {
+                        world.DestroyChunk(x, z);
+                    }
+                }
+            }
+        }
+    }
 }
