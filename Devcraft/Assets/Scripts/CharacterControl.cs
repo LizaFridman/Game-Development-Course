@@ -24,16 +24,18 @@ public class CharacterControl : MonoBehaviour
     void Update()
     {
         var moveCharecter = new Vector3(CrossPlatformInputManager.GetAxis("Horizontal"), 0, CrossPlatformInputManager.GetAxis("Vertical"));
-        transform.position += moveCharecter * Time.deltaTime * movementSpeed;
-
-        if (rigidBody.velocity.magnitude == 0)
+        if (moveCharecter != Vector3.zero)
         {
-            animator.SetBool("IsWalking", false);
+            animator.SetBool("IsWalking", true);
+            var targetRotation = Quaternion.LookRotation(moveCharecter, Vector3.up);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, 0.1f);
         }
         else
         {
-            animator.SetBool("IsWalking", true);
+            animator.SetBool("IsWalking", false);
         }
+
+        transform.position += moveCharecter * Time.deltaTime * movementSpeed;
 
         if (GameManager.Instance.IsJumping)
         {
@@ -57,3 +59,4 @@ public class CharacterControl : MonoBehaviour
         }
     }
 }
+
