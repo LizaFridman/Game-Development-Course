@@ -45,12 +45,14 @@ public class CharacterControl : MonoBehaviour
         if (GameManager.Instance.IsPunching)
         {
             animator.SetTrigger("Punch");
+            ModifyTerrain.Instance.DestroyBlock(10f, (byte)TextureType.Air.GetHashCode());
             GameManager.Instance.IsPunching = false;
         }
 
         if (GameManager.Instance.IsBuilding)
         {
             animator.SetTrigger("Punch");
+            ModifyTerrain.Instance.AddBlock(10f, (byte)TextureType.Rock.GetHashCode());// can change the texture depending on the input
             GameManager.Instance.IsBuilding = false;
         }
     }

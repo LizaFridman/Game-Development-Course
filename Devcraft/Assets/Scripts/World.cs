@@ -14,6 +14,10 @@ public class World : MonoBehaviour
     private byte[,,] worldData;
     private Chunk[,,] chunks;
 
+    public int ChunkSize { get => chunkSize; }
+    public Chunk[,,] Chunks { get => chunks; set => chunks = value; }
+    public byte[,,] WorldData { get => worldData; set => worldData = value; }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -48,7 +52,7 @@ public class World : MonoBehaviour
             {
                 for (var z = 0; z < chunks.GetLength(2); z++)
                 {
-                    var newChunk = Instantiate(chunk, new Vector3(x * chunkSize, y * chunkSize, z * chunkSize), new Quaternion(0, 0, 0, 0)) as GameObject;
+                    var newChunk = Instantiate(chunk, new Vector3(x * chunkSize -0.5f, y * chunkSize + 0.5f, z * chunkSize - 0.5f), new Quaternion(0, 0, 0, 0)) as GameObject;
                     chunks[x, y, z] = newChunk.GetComponent("Chunk") as Chunk;
                     chunks[x, y, z].WorldGO = gameObject;
                     chunks[x, y, z].ChunkSize = chunkSize;

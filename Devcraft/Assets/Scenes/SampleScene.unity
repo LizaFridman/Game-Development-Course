@@ -238,26 +238,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 219737902}
   m_CullTransparentMesh: 0
---- !u!1 &316730084 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3358753659660195032, guid: 6354228bdf64a134898eaee3c2a6ede3,
-    type: 3}
-  m_PrefabInstance: {fileID: 3358753659702907560}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &316730085
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 316730084}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a018d83143fec742b3956054fdde0f1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movementSpeed: 4
-  jumpHeight: 5
 --- !u!1 &371697729
 GameObject:
   m_ObjectHideFlags: 0
@@ -791,6 +771,24 @@ MonoBehaviour:
   target: {fileID: 3358753659702907561}
   distanceFromTarget: 2
   targetHeight: 1
+--- !u!1 &1126811998 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2161929264257157920, guid: 9191d45e656433f45bcb6da7801600da,
+    type: 3}
+  m_PrefabInstance: {fileID: 2161929265367019568}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1126811999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1126811998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5da188e0d596635459a1b84c4fe5088c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1309268229
 GameObject:
   m_ObjectHideFlags: 0
@@ -1447,10 +1445,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 45368946, guid: 6354228bdf64a134898eaee3c2a6ede3, type: 3}
-      propertyPath: m_Constraints
-      value: 112
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6354228bdf64a134898eaee3c2a6ede3, type: 3}

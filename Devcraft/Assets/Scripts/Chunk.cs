@@ -22,6 +22,7 @@ public class Chunk : MonoBehaviour
     private int chunkY;
     private int chunkZ;
     private GameObject worldGO;
+    private bool isUpdate = false;
 
     private Vector2 grassTop = new Vector2(1,11);
     private Vector2 grassSide = new Vector2(0,10);
@@ -32,6 +33,7 @@ public class Chunk : MonoBehaviour
     public int ChunkY { get => chunkY; set => chunkY = value; }
     public int ChunkZ { get => chunkZ; set => chunkZ = value; }
     public GameObject WorldGO { get => worldGO; set => worldGO = value; }
+    public bool IsUpdate { get => isUpdate; set => isUpdate = value; }
 
 
     // Start is called before the first frame update
@@ -45,12 +47,15 @@ public class Chunk : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
-        
+        if (IsUpdate) {
+            GenerateMesh();
+            IsUpdate = false;
+        }
     }
 
-    void GenerateMesh()
+    public void GenerateMesh()
     {
         for (var x = 0; x < chunkSize; x++)
         {
