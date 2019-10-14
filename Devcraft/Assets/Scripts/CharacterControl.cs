@@ -9,6 +9,7 @@ public class CharacterControl : MonoBehaviour
 
     private Rigidbody rigidBody;
     private Animator animator;
+    private AudioSource audioSource;
 
     //[SerializeField] GameObject player;
     // Start is called before the first frame update
@@ -18,6 +19,8 @@ public class CharacterControl : MonoBehaviour
         Assert.IsNotNull(rigidBody);
         animator = GetComponent<Animator>();
         Assert.IsNotNull(animator);
+        audioSource = GetComponent<AudioSource>();
+        Assert.IsNotNull(audioSource);
     }
 
     // Update is called once per frame
@@ -40,6 +43,7 @@ public class CharacterControl : MonoBehaviour
         if (GameManager.Instance.IsJumping)
         {
             animator.SetTrigger("Jump");
+            audioSource.PlayOneShot(AudioManager.Instance.Jump);
             rigidBody.AddForce(Vector3.up * jumpHeight, ForceMode.Impulse);
             GameManager.Instance.IsJumping = false;
         }
@@ -47,6 +51,7 @@ public class CharacterControl : MonoBehaviour
         if (GameManager.Instance.IsPunching)
         {
             animator.SetTrigger("Punch");
+            audioSource.PlayOneShot(AudioManager.Instance.Hit);
             ModifyTerrain.Instance.DestroyBlock(10f, (byte)TextureType.Air.GetHashCode());
             GameManager.Instance.IsPunching = false;
         }
@@ -54,6 +59,7 @@ public class CharacterControl : MonoBehaviour
         if (GameManager.Instance.IsBuilding)
         {
             animator.SetTrigger("Punch");
+            audioSource.PlayOneShot(AudioManager.Instance.Build);
             ModifyTerrain.Instance.AddBlock(10f, (byte)TextureType.Rock.GetHashCode());// can change the texture depending on the input
             GameManager.Instance.IsBuilding = false;
         }
