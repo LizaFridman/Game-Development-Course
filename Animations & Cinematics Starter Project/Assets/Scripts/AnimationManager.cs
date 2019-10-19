@@ -22,15 +22,15 @@ public class AnimationManager : MonoBehaviour
     }
 
     void StartNextCamera() {
-        if (cameras.Any())
-        {
             cameras[0].SetActive(true);
-        }
     }
 
     public void DestroyCamera(GameObject camera) {
-        cameras.RemoveAt(0);
-        Destroy(camera);
-        StartNextCamera();
+        if (cameras.Count > 1)
+        {
+            cameras.RemoveAt(0);
+            Destroy(camera);
+            StartNextCamera();
+        }
     }
 }
