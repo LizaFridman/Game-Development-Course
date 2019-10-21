@@ -26,7 +26,7 @@ public class Cam : MonoBehaviour
 
         if (lockCursor)
         {
-            Screen.lockCursor = true;
+            Cursor.lockState = CursorLockMode.Locked;
         }
     }
 
@@ -91,8 +91,8 @@ public class Cam : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var xAxis = Input.GetAxis("Horizontal");
-        var zAxis = Input.GetAxis("Vertical");
+        var xAxis = Input.GetAxis("Horizontal") / sensitivity;
+        var zAxis = Input.GetAxis("Vertical") / sensitivity;
 
         gameObject.transform.Translate(xAxis, 0, zAxis);
     }
