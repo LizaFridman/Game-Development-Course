@@ -1,9 +1,12 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Assertions;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] private Transform bulletSpawnPoint;
+    [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private float shootingDistance = 10f;
     private Transform targetedEnemy;
     private bool enemyClicked = false;
@@ -18,6 +21,8 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Assert.IsNotNull(bulletSpawnPoint);
+        Assert.IsNotNull(bulletPrefab);
         animator = GetComponent<Animator>();
         navAgent = GetComponent<NavMeshAgent>();
     }
@@ -92,6 +97,8 @@ public class Player : MonoBehaviour
     void Fire()
     {
         animator.SetTrigger("Attack");
-        print("Fire!");
+        var fireball = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation) as GameObject;
+        fireball.GetComponent<Rigidbody>().velocity = fireball.transform.forward * 4;
+        Destroy(fireball, 3.5f);
     }
 }
