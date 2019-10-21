@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     private Transform targetedEnemy;
     private bool enemyClicked = false;
     private bool walking = false;
+    private bool attacking = false;
     private Animator animator;
     private NavMeshAgent navAgent;
     private float nextFire;
@@ -36,6 +37,7 @@ public class Player : MonoBehaviour
                 }
                 else {
                     walking = true;
+                    attacking = false;
                     enemyClicked = false;
                     navAgent.destination = hit.point;
                     navAgent.isStopped = false;
@@ -50,12 +52,14 @@ public class Player : MonoBehaviour
         if (navAgent.remainingDistance <= navAgent.stoppingDistance)
         {
             walking = false;
-
         }
         else {
-            walking = true;
+            if (!attacking)
+            {
+                walking = true;
+            }
         }
-
+        
         animator.SetBool("IsWalking", walking);
     }
 
@@ -75,6 +79,7 @@ public class Player : MonoBehaviour
             transform.LookAt(targetedEnemy);
 
             if (Time.time > nextFire) {
+                attacking = true;
                 nextFire = Time.time + timeBetweenShots;
                 Fire();
             }
@@ -86,6 +91,7 @@ public class Player : MonoBehaviour
 
     void Fire()
     {
+        animator.SetTrigger("Attack");
         print("Fire!");
     }
 }
